@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block container %}
+  <h2>Booking Details</h2>
+  <p>Name: {{ booking.name }}</p>
+  <p>Email: {{ booking.email }}</p>
+  <p>Check-in Date: {{ booking.check_in_date }}</p>
+  <p>Check-out Date: {{ booking.check_out_date }}</p>
+  {% if booking.status == 'checked_in' %}
+    <p>Status: Checked In</p>
+    <form action="{{ url_for('check_out', booking_id=booking._id) }}" method="POST">
+      <button type="submit">Check Out</button>
+    </form>
+  {% else %}
+    <p>Status: Checked Out</p>
+  {% endif %}
+  <form action="{{ url_for('change_reservation', booking_id=booking._id) }}" method="POST">
+    <label for="check_in_date">Change Check-in Date:</label>
+    <input type="date" id="check_in_date" name="check_in_date" required><br><br>
+    <label for="check_out_date">Change Check-out Date:</label>
+    <input type="date" id="check_out_date" name="check_out_date" required><br><br>
+    <button type="submit">Change Reservation</button>
+  </form>
+{% endblock %}

@@ -1,11 +1,10 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block container %}
-<h2>Welcome!</h2>
-<p>Welcome to the Flask app. This is the home page. Here are a few links to example pages you might find interesting.
-    <ul>
-        <li><a href="{{ url_for('read')}}">a page that displays information pulled from a MongoDB database collection</a></li>
-        <li><a href="{{ url_for('create')}}">a page with a form you can submit to create a new record in a MongoDB collection</a></li>
-    </ul>
-</p>
+  <h2>Available Hotels</h2>
+  <ul>
+    {% for hotel in hotels %}
+      <li><a href="{{ url_for('book', hotel_id=hotel._id) }}">{{ hotel.name }}</a></li>
+    {% endfor %}
+  </ul>
 {% endblock %}
